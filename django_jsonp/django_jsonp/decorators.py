@@ -13,6 +13,7 @@ CALLBACK = 'callback'
 
 JSONP_TEMPLATE = u'{callback}({payload})'
 
+
 def get_callback(request):
     return request.GET.get(CALLBACK, request.GET.get(JSONP, None))
 

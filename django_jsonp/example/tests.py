@@ -48,6 +48,14 @@ class FBVTestCase(TestCase):
         response = self.simple_http_response_view(request=self.factory.get('/fake.json?jsonp={0}'.format(callback)))
         self.assert_content_and_content_type(response, callback)
 
+    def test_method_not_allowed(self):
+        callback = 'isThereASpoon'
+        put_response = self.simple_dict_view(request=self.factory.put('/fake.json?jsonp={0}'.format(callback)))
+        post_response = self.simple_dict_view(request=self.factory.post('/fake.json?jsonp={0}'.format(callback)))
+        delete_response = self.simple_dict_view(request=self.factory.delete('/fake.json?jsonp={0}'.format(callback)))
+        for r in [put_response, post_response, delete_response]:
+            self.assertIsInstance(r, HttpResponseNotAllowed)
+
 
 class CBVTestCase(TestCase):
     def setUp(self):
