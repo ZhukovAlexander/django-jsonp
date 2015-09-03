@@ -9,12 +9,12 @@ from django.views.generic import View
 
 APPLICATION_JS = 'application/javascript'
 JSONP = 'jsonp'
-СALLBACK = 'callback'
+CALLBACK = 'callback'
 
 JSONP_TEMPLATE = u'{callback}({payload})'
 
 def get_callback(request):
-    return request.GET.get(СALLBACK, request.GET.get(JSONP, None))
+    return request.GET.get(CALLBACK, request.GET.get(JSONP, None))
 
 
 def jsonp_response(response, callback=None):
@@ -22,7 +22,8 @@ def jsonp_response(response, callback=None):
         return HttpResponseBadRequest('No callback supplied')
 
     if isinstance(response, dict):
-        return HttpResponse(content=JSONP_TEMPLATE.format(callback=callback, payload=json.dumps(response)))
+        return HttpResponse(content=JSONP_TEMPLATE.format(callback=callback, payload=json.dumps(response)),
+                            content_type=APPLICATION_JS)
     elif isinstance(response, HttpResponse):
         response.content = JSONP_TEMPLATE.format(callback=callback, payload=response.content)
         response['Content-Type'] = APPLICATION_JS
@@ -36,10 +37,11 @@ def jsonp(view):
         @require_GET
         @wraps(view)
         def jsonpfied_view(request, *args, **kwargs):
+
             return jsonp_response(view(request, *args, **kwargs), callback=get_callback(request))
         return jsonpfied_view
 
-    elif isinstance(view, View):
+    elif issubclass(view, View):
         class JSONPfiedCBV(view):
             http_method_names = ['get']  # only GET method is allowed for JSONP
 
