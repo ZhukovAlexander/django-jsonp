@@ -3,9 +3,9 @@ from distutils.core import setup
 import django_jsonp
 
 with open('requirements.txt') as requirements:
-    reqs = requirements.readlines()
+    install_requires = requirements.readlines()
 
-setup(name='django-jsonp',
+setup(name='django_jsonp',
       version=django_jsonp.__version__,
       description='Simple JSONP support for django',
       long_description=open('README.md').read(),
@@ -14,7 +14,9 @@ setup(name='django-jsonp',
       url='http://github.com/ZhukovAlexander/django-jsonp',
       license='MIT',
       zip_safe=False,
-      install_requires=reqs,
+      install_requires=install_requires,
+      packages=['djsonp'],
+      package_dir={'djsonp': 'django_jsonp'},
       classifiers=['Development Status :: 3 - Alpha',
                    'Environment :: Web Environment',
                    'Framework :: Django',
