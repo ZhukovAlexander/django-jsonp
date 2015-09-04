@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from django.views.generic import View
 
-from django_jsonp import jsonp
+from django_jsonp.decorators import jsonp
 
 from django_jsonp.utils import APPLICATION_JS
 
