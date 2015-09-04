@@ -4,9 +4,10 @@ from django.http.response import HttpResponse, HttpResponseNotAllowed, HttpRespo
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.views.generic import View
+
 from django_jsonp import jsonp
 
-from django_jsonp.decorators import APPLICATION_JS
+from django_jsonp.utils import APPLICATION_JS
 
 
 class FBVTestCase(TestCase):
@@ -35,8 +36,8 @@ class FBVTestCase(TestCase):
         callback = 'showMeTheMoney'
         request = self.factory.get('/fake.json?callback={0}'.format(callback))
         response = self.simple_dict_view(request)
-        self.assertEqual(response.content, '{0}({1})'.format(callback, json.dumps(self.dict_response)))
-        self.assertEqual(response['Content-Type'], APPLICATION_JS)
+        self.assertEqual('{0}({1})'.format(callback, json.dumps(self.dict_response)), response.content)
+        self.assertEqual(APPLICATION_JS, response['Content-Type'])
 
     def test_response_correct_from_http_response(self):
         callback = 'whatsMyAgeAgain'
