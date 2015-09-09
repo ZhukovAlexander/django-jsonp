@@ -14,9 +14,7 @@ $ pip install git+https://github.com/ZhukovAlexander/django-jsonp#egg=django_jso
 ## Usage
 
 ```python
-from djsonp.decorators import jsonp
-from djsonp.response import JSONPResponse
-from djsonp.utils import get_callback
+from djsonp import jsonp, JSONPResponse, get_callback
 
 # decorate something that returns a dict-like object
 @jsonp
