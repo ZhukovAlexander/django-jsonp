@@ -3,12 +3,13 @@ Simple JSONP support for django
 
 [![Coverage Status](https://coveralls.io/repos/ZhukovAlexander/django-jsonp/badge.svg?branch=master&service=github)](https://coveralls.io/github/ZhukovAlexander/django-jsonp?branch=master)
 [![Build Status](https://travis-ci.org/ZhukovAlexander/django-jsonp.svg)](https://travis-ci.org/ZhukovAlexander/django-jsonp)
+[![PyPI version](https://badge.fury.io/py/django_jsonp.svg)](http://badge.fury.io/py/django_jsonp)
 ## Installation
 
 Install using `pip`...
 
 ```bash
-$ pip install git+https://github.com/ZhukovAlexander/django-jsonp#egg=django_jsonp
+$ pip install django-jsonp
 ```
 
 ## Usage
