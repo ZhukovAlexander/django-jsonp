@@ -2,8 +2,6 @@ from distutils.core import setup
 import os
 import re
 
-import django_jsonp
-
 with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as requirements:
     install_requires = requirements.readlines()
 
