@@ -1,11 +1,9 @@
 from functools import wraps
 import types
-import json
 
-from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_GET
 from django.views.generic import View
-from django_jsonp.response import JSONPResponse, get_jsonp_response
+from django_jsonp.response import get_jsonp_response
 
 from utils import get_callback
 
