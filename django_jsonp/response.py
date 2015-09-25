@@ -1,10 +1,11 @@
+from __future__ import absolute_import
 import json
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 from django.http.response import HttpResponseBadRequest
 
-from utils import APPLICATION_JS, JSONP_TEMPLATE
+from .utils import APPLICATION_JS, JSONP_TEMPLATE
 
 
 class JSONPResponse(HttpResponse):

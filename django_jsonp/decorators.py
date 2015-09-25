@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from functools import wraps
 import types
 
@@ -5,7 +7,7 @@ from django.views.decorators.http import require_GET
 from django.views.generic import View
 from django_jsonp.response import get_jsonp_response
 
-from utils import get_callback
+from .utils import get_callback
 
 
 def jsonp(view):

@@ -29,14 +29,15 @@ class FBVTestCase(TestCase):
         self.simple_http_response_view = simple_http_response_view
 
     def assert_content_and_content_type(self, response, callback):
-        self.assertEqual(response.content, '{0}({1})'.format(callback, json.dumps(self.dict_response)))
+        self.assertContains(response, callback)
+        self.assertContains(response, json.dumps(self.dict_response))
         self.assertEqual(response['Content-Type'], APPLICATION_JS)
 
     def test_response_correct_format_from_dict(self):
         callback = 'showMeTheMoney'
         request = self.factory.get('/fake.json?callback={0}'.format(callback))
         response = self.simple_dict_view(request)
-        self.assertEqual('{0}({1})'.format(callback, json.dumps(self.dict_response)), response.content)
+        self.assertContains(response, '{0}({1})'.format(callback, json.dumps(self.dict_response)))
         self.assertEqual(APPLICATION_JS, response['Content-Type'])
 
     def test_response_correct_from_http_response(self):
@@ -79,7 +80,8 @@ class CBVTestCase(TestCase):
         self.invalid_view = InvalidResponseFormat.as_view()
 
     def assert_content_and_content_type(self, response, callback):
-        self.assertEqual(response.content, '{0}({1})'.format(callback, json.dumps(self.dict_response)))
+        self.assertContains(response, callback)
+        self.assertContains(response, json.dumps(self.dict_response))
         self.assertEqual(response['Content-Type'], APPLICATION_JS)
 
     def test_correct_response(self):
