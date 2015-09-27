@@ -22,7 +22,7 @@ class JSONPResponse(HttpResponse):
 
     @classmethod
     def from_http_response(cls, http_response, callback, *args, **kwargs):
-        return cls(http_response.content, callback, safe=False,  *args, **kwargs)
+        return cls(http_response.content, callback, safe=False, *args, **kwargs)
 
 
 def get_jsonp_response(data, callback=None):
