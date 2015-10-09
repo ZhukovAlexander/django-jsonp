@@ -35,4 +35,12 @@ def another_view(request):
 # or just return a JSONPResponse
 def jsonp_view(request):
     return JSONPResponse(data={'foo': 'bar', }, callback=get_callback(request))
+
+# it also works for CBVs
+from django.views.generic import View
+
+@jsonp
+class DictResponse(View):
+    def get(self, request):
+        return HttpResponse("{'foo': 'bar'}")
 ```
